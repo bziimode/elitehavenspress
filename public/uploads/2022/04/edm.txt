@@ -1,0 +1,9 @@
+
+
+1. #174165 change to #333333
+2. border-radius:0px change to border-radius:30px
+3. georgia, times, 'times new roman', serif change to 'lucida sans unicode', 'lucida grande', sans-serif
+4. #3E587F change to #333333
+5. #97742E change to #333333
+6. #174165 change to #333333
+7. #a08144 change to #333333
