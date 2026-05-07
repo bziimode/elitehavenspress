@@ -28,5 +28,7 @@ $(document).ready(function() {
         $('#deleteModal').modal('show');
 
     });
+
+    $( ".datepicker" ).datepicker();
 });
 

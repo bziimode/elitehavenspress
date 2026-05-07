@@ -53,8 +53,8 @@
                         @foreach ($posts as $item)
                             <tr>
                                 <td>
-                                    <a target="_blank" href="{{url('uploads/posts/'.$item->slug.'/'.$item->filename)}}">
-                                        <img src="{{asset('uploads/posts/'.$item->slug.'/'.$item->thumbnail)}}" width="50px" alt="IMG">
+                                    <a target="_blank" href="{{url('uploads/'.$item->filename)}}">
+                                        <img src="{{asset('uploads/'.$item->thumbnail)}}" width="50px" alt="IMG">
                                     </a>
                                 </td>
 
@@ -62,19 +62,21 @@
                                         {{$item->title}}
                                 </td>
                                 <td>
-                                        {{$item->description}}
-                                        <br>
+                                        {{strip_tags($item->description)}}
+                                        <br><br>
+                                        <p class="published">
                                         @if( !empty($item->publish_date) )
-                                            <p class="published">Published: {!! date("d M Y", strtotime($item->publish_date)) !!}</p>
+                                            Published: {!! date("d M Y", strtotime($item->publish_date)) !!}
                                         @endif
                                         @if( !empty($item->author) )
-                                            <p class="author">Author: {!! $item->author !!}</p>
+                                            <br>Author: {!! $item->author !!}</p>
                                         @endif 
+                                        </p>
                                 </td>
 
                                 {{-- <td>{{$item->status == '0' ? 'Hidden' : 'Shown'}}</td> --}}
                                 <td>
-                                    <a target="_blank" href="{{url('uploads/posts/'.$item->slug.'/'.$item->filename)}}">
+                                    <a target="_blank" href="{{url('uploads/'.$item->filename)}}">
                                         View Article
                                     </a>
                                 </td>

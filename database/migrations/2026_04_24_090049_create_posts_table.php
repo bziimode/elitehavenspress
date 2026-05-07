@@ -17,10 +17,17 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->mediumText('description');
-            $table->date('article_date');
-            $table->date('publish_date');
+            $table->string('article_date');
+            $table->string('publish_date');
             $table->string('thumbnail');
             $table->string('filename');
+
+            $table->string('img_title');
+            $table->string('img_caption');
+            $table->string('img_desc');
+            $table->string('img_alt');
+            $table->string('img_featured');
+            $table->string('excerpt');
 
             $table->string('author');
 

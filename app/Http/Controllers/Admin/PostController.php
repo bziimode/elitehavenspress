@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function index()
     {        
-        $posts = Post::all();
+        $posts = Post::latest()->get();
         return view('admin.post.index', compact('posts'));
     }
 
@@ -36,33 +36,37 @@ class PostController extends Controller
         $posts->publish_date = $fields['publish_date'];
         $posts->author = $fields['author'];
 
-        $folder = $fields['slug'];
-        if( !is_dir(public_path().'/uploads/posts/'.$folder) ):
-            File::makeDirectory(public_path().'/uploads/posts/'.$folder, $mode = 0777, TRUE, TRUE);
+        $folder = date('Y').'/'.date('m');
+        if( !is_dir(public_path().'/uploads/'.$folder) ):
+            File::makeDirectory(public_path().'/uploads/'.$folder, $mode = 0777, TRUE, TRUE);
         endif;
         if( $request->hasFile('thumbnail') ):
             
-            $destination = "uploads/posts/".$posts->slug.'/'.$posts->thumbnail;
-            if (File::exists($destination)){
-                File::delete($destination);
-            }
+            $image = $request->file('thumbnail');
+            $name = $image->getClientOriginalName();
+            
+            $imgFileName = public_path().'/uploads/'.$folder.'/'.$image->getClientOriginalName();
+            $image->storeAs($folder, $image->getClientOriginalName());
+            $posts->thumbnail = $folder.'/'.$name;
 
-            $file = $request->file('thumbnail');
-            $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move('uploads/posts/'.$posts->slug.'/',$filename);
-            $posts->thumbnail = $filename;
 
         endif;
 
         if( $request->hasFile('filename') ):
-            $destination = "uploads/posts/".$posts->slug.'/'.$posts->filename;
-            if (File::exists($destination)){
-                File::delete($destination);
-            }
-            $file = $request->file('filename');
-            $filename = $file->getClientOriginalName();
-            $file->move('uploads/posts/'.$posts->slug.'/',$filename);
-            $posts->filename = $filename;
+            // $destination = "uploads/posts/".$posts->slug.'/'.$posts->filename;
+            // if (File::exists($destination)){
+            //     File::delete($destination);
+            // }
+            // $file = $request->file('filename');
+            // $filename = $file->getClientOriginalName();
+            // $file->move('uploads/posts/'.$posts->slug.'/',$filename);
+            // $posts->filename = $filename;
+
+            $article = $request->file('filename');
+            $article->storeAs($folder, $article->getClientOriginalName());
+            $dFile = $article->getClientOriginalName();
+            $posts->filename = $folder.'/'.$dFile;
+
         endif;
 
 
@@ -91,37 +95,58 @@ class PostController extends Controller
         $post = Post::find($post_id);
         $post->category_id = $request['category_id'];
         $post->title = $fields['title'];
-        $post->slug = $fields['slug'];
+        $post->slug = ($fields['slug']!='') ? $fields['slug'] : strtolower(str_replace(' ', '-', $fields['title'])) ;
         $post->description = $fields['description'];
         $post->article_date = $fields['article_date'];
         $post->publish_date = $fields['publish_date'];
         $post->author = $fields['author'];
 
+        $folder = date('Y').'/'.date('m');
+
         if( $request->hasFile('thumbnail') ):
             
-            $destination = "uploads/posts/".$post->slug.'/'.$post->thumbnail;
+            $destination = "uploads/".$folder.'/'.$post->thumbnail;
             if (File::exists($destination)){
                 File::delete($destination);
             }
 
             $file = $request->file('thumbnail');
             $filename = time().'.'.$file->getClientOriginalExtension();
-            $file->move('uploads/posts/'.$post->slug.'/',$filename);
-            $post->thumbnail = $filename;
+            $file->move('uploads/'.$folder.'/',$filename);
+            $post->thumbnail = $folder.'/'.$filename;
+
+
+            // $image = $request->file('thumbnail');
+            // $origFile = '/uploads/'.$folder.'/'.$fields['thumbnail'];
+            // // if( file_exists($origFile) && !is_dir($origFile) ):
+            // //     unlink($origFile);
+            // // endif;
+            // if (File::exists($origFile)){
+            //     File::delete($origFile);
+            // }
+            // $imgFileName = '/uploads/'.$folder.'/'.$image->getClientOriginalName();
+            // $image->storeAs($folder, $image->getClientOriginalName());
+            // $post->thumbnail = $folder.'/'.$image->getClientOriginalName();
+            // $post->img_featured = $imgFileName;
+
+
 
         endif;
 
         if( $request->hasFile('filename') ):
-            $destination = "uploads/posts/".$post->slug.'/'.$post->filename;
+            $destination = "uploads/".$folder.'/'.$post->thumbnail;
             if (File::exists($destination)){
                 File::delete($destination);
             }
             $file = $request->file('filename');
             $filename = $file->getClientOriginalName();
-            $file->move('uploads/posts/'.$post->slug.'/',$filename);
-            $post->filename = $filename;
+            $file->move('uploads/'.$folder.'/',$filename);
+            $post->filename = $folder.'/'.$filename;
+
+
         endif;
 
+        
         $post->meta_title = $fields['meta_title'];
         $post->meta_description = $fields['meta_description'];
         $post->meta_keyword = $fields['meta_keyword'];
@@ -137,11 +162,11 @@ class PostController extends Controller
         $post = Post::find($request->post_delete_id);
         if($post){
             
-            $destination = "uploads/posts/".$post->thumbnail;
+            $destination = "uploads/".$post->thumbnail;
             if (File::exists($destination)){
                 File::delete($destination);
             }
-            $destination = "uploads/posts/".$post->filename;
+            $destination = "uploads/".$post->filename;
             if (File::exists($destination)){
                 File::delete($destination);
             }

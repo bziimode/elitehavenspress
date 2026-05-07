@@ -29,7 +29,7 @@ class PostFormRequest extends FormRequest
                 'max:200'
             ],
             'slug' => [
-                'required',
+                'nullable',
                 'string',
                 'max:200'
             ],
@@ -49,20 +49,23 @@ class PostFormRequest extends FormRequest
             'filename' => [
                 'nullable'
             ],
+            'img_title' => [
+                'nullable'
+            ],
             'author' => [
                 'required'
             ],            
             'meta_title' => [
-                'required',
+                'nullable',
                 'string',
                 'max:200'
             ],
             'meta_description' => [
-                'required',
+                'nullable',
                 'string'
             ],
             'meta_keyword' => [
-                'required',
+                'nullable',
                 'string'
             ],
             'status' => [

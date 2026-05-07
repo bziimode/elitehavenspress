@@ -12,9 +12,10 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.2/themes/base/jquery-ui.css">
     <!-- Scripts
     -->
+    
 
     <link href="{{ asset('assets/css/styles.css')}}" rel="stylesheet">
 </head>
@@ -77,7 +78,8 @@
         </main>
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.2/jquery-ui.js"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js')}}" defer></script>
     <script src="{{ asset('assets/js/custom-admin.js')}}"></script>
 

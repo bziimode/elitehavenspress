@@ -37,7 +37,7 @@
                     <div class="content">
                         <div class="group right-content">
                             <div class="half">
-                                <img src="{{ asset('uploads/posts/'.$pContents->slug.'/'.$pContents->thumbnail) }}" alt="">
+                                <img src="{{ asset('uploads/'.$pContents->thumbnail) }}" alt="">
                             </div>
                             <div class="half">
                                 <h3>{!! $pContents->title !!}</h3>
@@ -46,7 +46,7 @@
                         </div>
                         <div class="group bottom-content">
                             <div class="half">
-                            <a href="{{ asset('uploads/posts/'.$pContents->slug.'/'.$pContents->filename) }}" target="_blank">Download Complete Article</a>
+                            <a href="{{ asset('uploads/'.$pContents->filename) }}" target="_blank">Download Complete Article</a>
                             </div>
                             <div class="half">
                                 @if( !empty($pContents->publish_date) )
