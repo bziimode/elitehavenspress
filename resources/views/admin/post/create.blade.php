@@ -45,11 +45,11 @@
                     </div>
                     <div class="mb-3">
                         <label>Article Date</label>
-                        <input type="date" id="article_date" name="article_date" class="form-control" placeholder="Date of Article. Click to select date" />
+                        <input type="text" id="article_date" name="article_date" class="datepicker form-control" placeholder="Date of Article. Click to select date" />
                     </div>
                     <div class="mb-3">
                         <label>Publish Date</label>
-                        <input type="date" id="publish_date" name="publish_date" class="form-control" placeholder="Click to select a date from calendar or type a specific date" />
+                        <input type="text" id="publish_date" name="publish_date" class="datepicker form-control" placeholder="Click to select a date from calendar or type a specific date" />
                     </div>
                     <div class="mb-3">
                         <label>Author</label>

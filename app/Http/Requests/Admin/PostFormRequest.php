@@ -34,13 +34,13 @@ class PostFormRequest extends FormRequest
                 'max:200'
             ],
             'description' => [
-                'required'
+                'nullable'
             ],            
             'article_date' => [
-                'required'
+                'nullable'
             ],            
             'publish_date' => [
-                'required'
+                'nullable'
             ],
             'thumbnail' => [
                 'nullable',
@@ -53,7 +53,7 @@ class PostFormRequest extends FormRequest
                 'nullable'
             ],
             'author' => [
-                'required'
+                'nullable'
             ],            
             'meta_title' => [
                 'nullable',

@@ -49,7 +49,7 @@
                             <a href="{{ asset('uploads/'.$pContents->filename) }}" target="_blank">Download Complete Article</a>
                             </div>
                             <div class="half">
-                                @if( !empty($pContents->publish_date) )
+                                @if( !empty($pContents->publish_date) && $pContents->publish_date != '01/01/1970' )
                                 <p class="published">Published: {!! date("d M Y", strtotime($pContents->publish_date)) !!}</p>
                                 @endif
                                 @if( !empty($pContents->author) )

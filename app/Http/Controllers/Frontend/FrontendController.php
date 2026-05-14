@@ -12,7 +12,7 @@ class FrontendController extends Controller
     {
         $title = 'In the Press - Elite Havens Luxury Villa Rentals';
         //$pressContents = Post::where('status','1')->orderBy('ID', 'DESC')->get();
-        $pressContents = Post::latest('article_date')->get();
+        $pressContents = Post::latest('id')->get();
         $destinations = [
             'bali'=>'Bali',
             'lombok'=>'Lombok',

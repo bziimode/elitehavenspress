@@ -68,7 +68,7 @@
 	<script type="text/javascript">
 		// back to index after search
 		let url = document.URL;
-		let targetURL = "https://press.elitehavens.com/main/search"; 
+		let targetURL = "{{ url('/main/search') }}"; 
 		if(targetURL == url) {
 			document.querySelector('.back-to-home').style.display='block';
 		}
@@ -88,14 +88,15 @@
 			var email = $('input#email').val();
 			var cntry = $('select#drpCountry').val();
 			$('span#newsLetterMessage').html('Submitting form...');
-
+			
 			$.ajax({
 				type: "POST",
 				dataType: "json",
 				data: {'fname':fname,'lname':lname,'email':email,'country':cntry},
-				//url: "{{ url('/main/subscribe') }}",
-				url: "https://press.elitehavens.com/main/subscribe",
+				url: "{{ url('/main/subscribe') }}",
+				//url: "https://press.elitehavens.com/main/subscribe",
 				success: function (data) {
+					console.log('data',data);
 					$('span#newsLetterMessage').empty().html(data.sub_message);
 					setTimeout(function(){
 						$('span#newsLetterMessage').fadeOut(500);
