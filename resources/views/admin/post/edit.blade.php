@@ -61,10 +61,18 @@
                     </div>
                     <div class="mb-3">
                         <label>Thumbnail</label>
+                        @if ($post->thumbnail)
+                            <br>
+                            <img src="{{ asset('uploads/'.$post->thumbnail) }}" alt="" width="100">
+                        @endif
                         <input type="file" name="thumbnail" value="{{ $post->thumbnail }}" accept="image/x-png,image/gif,image/jpeg" class="form-control"/>
                     </div>
                     <div class="mb-3">
                         <label>Article File</label>
+                        @if ($post->filename)
+                        <br>
+                            <a href="{{ asset('uploads/'.$post->filename) }}" target="_blank">View Article</a>
+                        @endif
                         <input type="file" name="filename" value="" class="form-control"/>
                     </div>
                    

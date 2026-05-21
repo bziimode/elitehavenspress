@@ -11,8 +11,8 @@ class FrontendController extends Controller
     public function index()
     {
         $title = 'In the Press - Elite Havens Luxury Villa Rentals';
-        //$pressContents = Post::where('status','1')->orderBy('ID', 'DESC')->get();
-        $pressContents = Post::latest('id')->get();
+        $pressContents = Post::where('status','1')->orderBy('ID', 'DESC')->get();
+       // $pressContents = Post::latest('id')->get();
         $destinations = [
             'bali'=>'Bali',
             'lombok'=>'Lombok',
